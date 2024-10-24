@@ -13,7 +13,7 @@ function MarketFreeze() {
     axios
       .get("http://35.200.147.33/api/admin/market-status", {
         headers: {
-          admin_token: token,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
@@ -41,9 +41,9 @@ function MarketFreeze() {
     const newFreezeState = !isFrozen; // Toggle freeze state
 
     axios
-      .post(`http://35.200.147.33/api/admin/market-freeze`, { freeze: newFreezeState }, {
+      .post(`http://localhost:9999/admin/market-freeze`, { freeze: newFreezeState }, {
         headers: {
-          admin_token: token,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {

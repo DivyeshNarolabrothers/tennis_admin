@@ -21,7 +21,7 @@ function Usertransation() {
     try {
       const token = localStorage.getItem("admin_token"); // Get the admin token from local storage
       const response = await axios.get("http://35.200.147.33/api/admin/usertransation", {
-        headers: { admin_token: token }, // Pass the admin token in the header
+       headers:{ Authorization: `Bearer ${token}`}, // Pass the admin token in the header
       });
 
       // Check if the response is successful and set the transactions state

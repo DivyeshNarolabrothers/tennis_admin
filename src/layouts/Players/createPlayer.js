@@ -548,9 +548,9 @@ function CreatePlayer() {
     const fetchFreezeStatus = () => {
       const token = localStorage.getItem("admin_token");
       axios
-        .get("http://35.200.147.33/api/admin/market-status", {
+        .get("http://localhost:9999/admin/market-status", {
           headers: {
-            admin_token: token,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
@@ -580,7 +580,7 @@ function CreatePlayer() {
       axios
         .post(`http://35.200.147.33/api/admin/market-freeze`, { freeze: newFreezeState }, {
           headers: {
-            admin_token: token,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
@@ -622,14 +622,14 @@ function CreatePlayer() {
         }));
       }
     };
-  
+
     // Fetch player data
     const fetchPlayerData = () => {
       const token = localStorage.getItem("admin_token");
       axios
         .get("http://35.200.147.33/api/admin/players", {
           headers: {
-            admin_token: token,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
@@ -667,7 +667,7 @@ function CreatePlayer() {
             axios
                 .patch(`http://35.200.147.33/api/admin/updateplayer/${editId}`, formData, {
                     headers: {
-                        admin_token: token,
+                      Authorization: `Bearer ${token}`,
                     },
                 })
                 .then(() => {
@@ -683,7 +683,7 @@ function CreatePlayer() {
             axios
                 .post(`http://35.200.147.33/api/admin/createPlayer`, formData, {
                     headers: {
-                        admin_token: token,
+                      Authorization: `Bearer ${token}`,
                     },
                 })
                 .then(() => {
@@ -737,7 +737,7 @@ function CreatePlayer() {
         axios
           .delete(`http://35.200.147.33/api/admin/deleteplayer/${id}`, {
             headers: {
-              admin_token: token, // Include token in headers if needed
+              Authorization: `Bearer ${token}`, // Include token in headers if needed
             },
           })
           .then(() => {

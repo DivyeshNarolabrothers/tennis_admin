@@ -45,7 +45,9 @@ function UserList() {
     try {
       const token = localStorage.getItem("admin_token");
       const response = await axios.get("http://35.200.147.33/api/admin/userList", {
-        headers: { admin_token: token },
+        headers:{
+           Authorization: `Bearer ${token}`
+        }
       });
 
       if (Array.isArray(response.data.userDetails)) {
@@ -118,7 +120,7 @@ function UserList() {
         const response = await axios.patch(
           `http://35.200.147.33/api/admin/userUpdate-team-players/${selectedUser._id}`,
           { players: payload }, // Only updating share_quantity
-          { headers: { admin_token: token } }
+          {headers:{  Authorization: `Bearer ${token}` }}
         );
 
         if (response.status === 200) {
@@ -166,7 +168,7 @@ function UserList() {
           formDataToSend,
           {
             headers: {
-              admin_token: token,
+               Authorization: `Bearer ${token}`,
               "Content-Type": "multipart/form-data",
             },
           }
@@ -337,7 +339,7 @@ function UserList() {
             },
           ],
         },
-        { headers: { admin_token: token } }
+        {headers:{ Authorization: `Bearer ${token}` }}
       );
 
       if (response.status === 200) {

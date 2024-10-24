@@ -73,14 +73,13 @@ function Faq() {
           timer: 3000,
         });
       };
-    
 
     const fetchFaqs = async () => {
         try {
             const token = localStorage.getItem('admin_token');
             const response = await axios.get('http://35.200.147.33/api/admin/faqs', {
                 headers: {
-                    admin_token: token,
+                    Authorization: `Bearer ${token}`,
                 },
             });
             setFaqs(response.data);
@@ -121,7 +120,7 @@ function Faq() {
         try {
             const response = await axios[currentFaqId ? 'put' : 'post'](url, formData, {
                 headers: {
-                    admin_token: token,
+                    Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });
@@ -147,7 +146,7 @@ function Faq() {
 
         try {
             await axios.delete(`http://35.200.147.33/api/admin/faq/delete/${faqId}`, {
-                headers: { admin_token: token },
+                headers: {  Authorization: `Bearer ${token}` },
             });
             setFaqs((prevFaqs) => prevFaqs.filter((faq) => faq._id !== faqId));
             showAutoCloseAlert('FAQ deleted successfully.');

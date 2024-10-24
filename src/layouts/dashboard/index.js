@@ -54,7 +54,7 @@ function Dashboard() {
   const fetchFreezeStatus = () => {
     const token = localStorage.getItem("admin_token");
     axios
-      .get("http://35.200.147.33/api/admin/market-status", {
+      .get("http://localhost:9999/admin/market-status", {
         headers: {
           admin_token: token,
         },
