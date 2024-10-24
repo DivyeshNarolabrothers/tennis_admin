@@ -225,10 +225,10 @@ function Faq() {
                                 <Card.Text>{faq.answer}</Card.Text>
                                 <div className="d-flex">
                                     <Button onClick={() => handleEdit(faq._id)} style={{ backgroundColor: 'black', border: 'none', marginRight: '5px' }}>
-                                    <i class="bi bi-pencil-square"></i>
+                                    <i className="bi bi-pencil-square"></i>
                                     </Button>
                                     <Button variant="danger" onClick={() => handleDelete(faq._id)} style={{ backgroundColor: 'black', border: 'none' }}>
-                                    <i class="bi bi-trash3"></i>
+                                    <i className="bi bi-trash3"></i>
                                     </Button>
                                 </div>
                             </Card.Body>

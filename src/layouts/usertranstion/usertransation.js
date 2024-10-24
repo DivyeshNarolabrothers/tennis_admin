@@ -104,7 +104,7 @@ function Usertransation() {
                   <td>{transaction.grand_total_credits}</td>
                   <td>
                     <Button variant="primary" onClick={() => handleViewPlayers(transaction.players_data)}>
-                    <i class="bi bi-eye"></i>
+                    <i className="bi bi-eye"></i>
                     </Button>
                   </td>
                 </tr>
@@ -120,11 +120,11 @@ function Usertransation() {
               </Col>
               <Col xs={12} md={6} className="text-md-end">
                 <Button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} variant="secondary" className="me-2">
-                <i class="bi bi-caret-left"></i>
+                <i className="bi bi-caret-left"></i>
                 </Button>
                 <span style={{ margin: '0 10px' }}>{currentPage}</span>
                 <Button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastItem >= transactions.length} variant="secondary">
-                <i class="bi bi-caret-right"></i>
+                <i className="bi bi-caret-right"></i>
                 </Button>
               </Col>
             </Row>

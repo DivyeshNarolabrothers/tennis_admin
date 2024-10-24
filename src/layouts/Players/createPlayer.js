@@ -874,14 +874,14 @@ function CreatePlayer() {
                           </td>
                           <td>
                             <Button variant="primary" onClick={() => handleEdit(player?._id)}>
-                            <i class="bi bi-pencil-square"></i>
+                            <i className="bi bi-pencil-square"></i>
                             </Button>
                             <Button
                               variant="danger"
                               style={{ margin: "5px" }}
                               onClick={() => handleDelete(player?._id)}
                             >
-                            <i class="bi bi-trash3"></i>
+                            <i className="bi bi-trash3"></i>
                             </Button>
                           </td>
                         </tr>

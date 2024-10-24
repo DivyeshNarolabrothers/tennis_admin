@@ -419,10 +419,10 @@ function UserList() {
                     onClick={() => handleViewUser(user)}
                     style={{ marginRight: "10px" }}
                   >
-                   <i class="bi bi-eye"></i>
+                   <i className="bi bi-eye"></i>
                   </Button>
                   <Button variant="secondary" onClick={() => handleEditUser(user)}>
-                  <i class="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                   </Button>
                 </td>
               </tr>
