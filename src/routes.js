@@ -59,6 +59,7 @@ import UserList from "layouts/User/userlist";
 import Usertransation from "layouts/usertranstion/usertransation";
 import CreatePlayer from "layouts/Players/createPlayer";
 import MarketFreeze from "layouts/marketFreeze/marketFreezepage";
+import BannerText from "layouts/BannerText/bannertext";
 
 const routes = [
   // {
@@ -81,49 +82,54 @@ const routes = [
   // },
   {
     type: "collapse",
-    name: "UserList",
-    key: "UserList",
-    route: "/UserList",
+    name: "Users",
+    key: "Users",
+    route: "/Users",
     icon: <Shop size="12px" />,
     component: <UserList />,
     noCollapse: true,
   },
   {
     type: "collapse",
-    name: "Usertransation",
-    key: "Usertransation",
-    route: "/Usertransation",
+    name: "UserTransactions",
+    key: "UserTransactions",
+    route: "/UserTransactions",
     icon: <CreditCard size="12px" />,
     component: <Usertransation />,
     noCollapse: true,
   },
   {
     type: "collapse",
-    name: "CreatePlayer",
-    key: "CreatePlayer",
-    route: "/CreatePlayer",
+    name: "Players",
+    key: "Players",
+    route: "/Players",
     icon: <CustomerSupport size="12px" />,
     component: <CreatePlayer />,
     noCollapse: true,
   },
   {
     type: "collapse",
-    name: "Faq",
-    key: "Faq",
-    route: "/faq",
+    name: "FAQ",
+    key: "FAQ",
+    route: "/FAQ",
     icon: <Office size="12px" />,
     component: <Faq />,
     noCollapse: true,
   },
-  
-  { type: "title", title: "Account Pages", key: "account-pages" },
- 
   {
     type: "collapse",
-    name: "Sign In",
-    key: "sign-in",
+    name: "Banner-Text",
+    key: "Banner-Text",
+    route: "/Banner-Text",
+    icon: <Office size="12px" />,
+    component: <BannerText />,
+    noCollapse: true,
+  },
+  
+  // { type: "title", title: "Account Pages", key: "account-pages" },
+ 
+  {
     route: "/authentication/sign-in",
-    icon: <Document size="12px" />,
     component: <SignIn />,
     noCollapse: true,
   },

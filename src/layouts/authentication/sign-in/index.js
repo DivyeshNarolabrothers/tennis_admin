@@ -138,17 +138,17 @@ function SignIn() {
     e.preventDefault(); // Prevent default form submission
 
     try {
-      const response = await axios.post('http://35.200.147.33/api/admin/login', {
+      const response = await axios.post('http://35.200.147.33/api/login', {
         email,
         password,
-      });
+      });     
 
       // Assuming the response contains the token
       const token = response.data.token; // Adjust this based on your API response structure
       if (token) {
         localStorage.setItem('admin_token', token); // Store token in local storage
         showAutoCloseAlert('Sign in successful', response.data.message);
-        navigate('/UserList'); // Navigate to the dashboard upon successful sign-in
+        navigate('/Users'); // Navigate to the dashboard upon successful sign-in
         
       } else {
         showAutoError('Invalid credentials. Please try again.'); // Handle invalid token case

@@ -256,263 +256,6 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Swal from "sweetalert2";
 
-// function CreatePlayer() {
-//     const [show, setShow] = useState(false);
-//     const [data, setData] = useState({});
-//     const [productdata, setProductData] = useState([]);
-//     const [editId, setEditId] = useState(null);
-//     const [categoryId, setCategoryId] = useState("");
-//     const [categories, setCategories] = useState([]);
-//     const [currentPage, setCurrentPage] = useState(1);
-//     const [itemsPerPage] = useState(20); // Set items per page
-  
-//     // Close modal
-//     const handleClose = () => {
-//       setShow(false);
-//       setData({});
-//       setEditId(null);
-//     };
-  
-//     // Show modal
-//     const handleShow = () => setShow(true);
-  
-//     // Handle input changes
-//     const handlePostData = (e) => {
-//       const { name, files, value } = e.target;
-//       if (files) {
-//         setData((prevState) => ({
-//           ...prevState,
-//           [name]: files[0],
-//         }));
-//       } else {
-//         setData((prevState) => ({
-//           ...prevState,
-//           [name]: value,
-//         }));
-//       }
-//     };
-  
-//     // Fetch categories and player data on component mount
-//     useEffect(() => {
-//       const token = localStorage.getItem("admin_token");
-//       axios
-//         .get("http://35.200.147.33/api/admin/players", {
-//           headers: {
-//             admin_token: token,
-//           },
-//         })
-//         .then((response) => {
-//           setCategories(response.data.result);
-//           setProductData(response.data.data); // Set player data
-//         })
-//         .catch((error) => console.error("Error fetching player data:", error));
-//     }, []);
-  
-   
-//     const handleSubmit = () => {
-//         const formData = new FormData();
-//         for (const key in data) {
-//           formData.append(key, data[key]);
-//         }
-//         formData.append("category_id", categoryId);
-      
-//         const token = localStorage.getItem("admin_token");
-      
-//         if (editId) {
-//           // Update existing player
-//           axios
-//             .patch(`http://35.200.147.33/api/admin/updateplayer/${editId}`, formData, {
-//               headers: {
-//                 admin_token: token,
-//               },
-//             })
-//             .then((response) => {
-//               const updatedPlayer = response.data.result;
-//               // Update productdata state with the updated player
-//               setProductData((prevProductData) =>
-//                 prevProductData.map((player) =>
-//                   player._id === editId ? updatedPlayer : player
-//                 )
-//               );
-//               handleClose();
-//             })
-//             .catch((error) => {
-//               console.error("Error updating player:", error);
-//             });
-//         } else {
-//           // Add new player
-//           axios
-//             .post(`http://35.200.147.33/api/admin/createPlayer`, formData, {
-//               headers: {
-//                 admin_token: token,
-//               },
-//             })
-//             .then((response) => {
-//               const newPlayer = response.data.result;
-//               // Add the new player to productdata state
-//               setProductData((prevProductData) => [newPlayer, ...prevProductData]);
-//               handleClose();
-//             })
-//             .catch((error) => {
-//               console.error("Error adding player:", error);
-//             });
-//         }
-//       };
-      
-//     // Logic for pagination
-//     const indexOfLastItem = currentPage * itemsPerPage;
-//     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-//     const currentItems = productdata.slice(indexOfFirstItem, indexOfLastItem);
-  
-//     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
-//     return (
-//       <div className="container-fluid">
-//         <DashboardLayout>
-//           <DashboardNavbar />
-//           <div className="row">
-//             <div className="col">
-//               <Button
-//                 variant="primary"
-//                 onClick={handleShow}
-//                 className="mb-3"
-//                 style={{ background: "#B42134", border: "none" }}
-//               >
-//                 Add Player
-//               </Button>
-  
-//               {/* Modal for adding/updating player */}
-//               <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} centered>
-//                 <Modal.Header closeButton>
-//                   <Modal.Title>{editId ? "Edit Player" : "Add Player"}</Modal.Title>
-//                 </Modal.Header>
-//                 <Modal.Body>
-//                   <Form>
-//                     <Row className="mb-3">
-//                       <Col>
-//                         <Form.Label>Name</Form.Label>
-//                         <Form.Control
-//                           type="text"
-//                           placeholder="Enter name"
-//                           value={data.name || ""}
-//                           onChange={handlePostData}
-//                           name="name"
-//                         />
-//                       </Col>
-//                     </Row>
-//                     <Row className="mb-3">
-//                       <Col>
-//                         <Form.Label>Value</Form.Label>
-//                         <Form.Control
-//                           type="text"
-//                           placeholder="Enter value"
-//                           value={data.value || ""}
-//                           onChange={handlePostData}
-//                           name="value"
-//                         />
-//                       </Col>
-//                     </Row>
-//                     <Row className="mb-3">
-//                       <Col>
-//                         <Form.Label>Profile Image</Form.Label>
-//                         <Form.Control type="file" onChange={handlePostData} name="profile_image" />
-//                       </Col>
-//                     </Row>
-//                   </Form>
-//                 </Modal.Body>
-//                 <Modal.Footer>
-//                   <Button variant="secondary" onClick={handleClose}>
-//                     Close
-//                   </Button>
-//                   <Button variant="primary" onClick={handleSubmit}>
-//                     {editId ? "Update" : "Submit"}
-//                   </Button>
-//                 </Modal.Footer>
-//               </Modal>
-  
-//               {/* Player table */}
-//               <div className="table-responsive">
-//                 <Table bordered hover>
-//                   <thead>
-//                     <tr className="text-center" style={{ fontSize: "85%" }}>
-//                       <th>Profile Image</th>
-//                       <th>Name</th>
-//                       <th>Value</th>
-//                       <th>Action</th>
-//                     </tr>
-//                   </thead>
-//                   <tbody>
-//                     {currentItems.map((player) => (
-//                       <tr key={player._id} className="text-center" style={{ fontSize: "90%" }}>
-//                         <td>
-//                           <img
-//                             style={{ width: "50px", height: "50px",borderRadius:"50%" }}
-//                             src={`http://35.200.147.33/api/images/${player.profile_image}`}
-//                             alt="Profile"
-                            
-//                           />
-//                         </td>
-//                         <td>{player.name}</td>
-//                         <td>
-//                           {player.value_data.length > 0
-//                             ? player.value_data[player.value_data.length - 1].value
-//                             : player.value}
-//                         </td>
-//                         <td>
-//                           <Button variant="primary" onClick={() => handleEdit(player._id)}>
-//                             Edit
-//                           </Button>
-//                           <Button
-//                             variant="danger"
-//                             style={{ margin: "5px" }}
-//                             onClick={() => handleDelete(player._id)}
-//                           >
-//                             Delete
-//                           </Button>
-//                         </td>
-//                       </tr>
-//                     ))}
-//                   </tbody>
-
-
-//                 </Table>
-//               </div>
-  
-//               {/* Pagination */}
-//               <footer className="mt-4">
-//                 <Row className="align-items-center">
-//                   <Col xs={12} md={6}>
-//                     <span>
-//                       Showing {indexOfFirstItem + 1} to{" "}
-//                       {Math.min(indexOfLastItem, productdata.length)} of {productdata.length} entries
-//                     </span>
-//                   </Col>
-//                   <Col xs={12} md={6} className="text-md-end">
-//                     <Button
-//                       onClick={() => paginate(currentPage - 1)}
-//                       disabled={currentPage === 1}
-//                       variant="secondary"
-//                       className="me-2"
-//                     >
-//                       <i className="bi bi-caret-left"></i>
-//                     </Button>
-//                     <span>{currentPage}</span>
-//                     <Button
-//                       onClick={() => paginate(currentPage + 1)}
-//                       disabled={indexOfLastItem >= productdata.length}
-//                       variant="secondary"
-//                     >
-//                       <i className="bi bi-caret-right"></i>
-//                     </Button>
-//                   </Col>
-//                 </Row>
-//               </footer>
-//             </div>
-//           </div>
-//         </DashboardLayout>
-//       </div>
-//     );
-//   }
 function CreatePlayer() {
     const [show, setShow] = useState(false);
     const [data, setData] = useState({});
@@ -521,6 +264,55 @@ function CreatePlayer() {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
     const [isFrozen, setIsFrozen] = useState(false); // State to track freeze status
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    const [newFreezeState, setNewFreezeState] = useState(false);
+  
+    const handleFreezeToggle = () => {
+      const token = localStorage.getItem("admin_token");
+  
+      // Determine the new state for freeze
+      const newState = !isFrozen;
+      setNewFreezeState(newState);  // Store the new freeze state
+  
+      // Show confirmation dialog
+      setShowConfirmDialog(true);
+    };
+  
+    const handleConfirm = () => {
+      const token = localStorage.getItem("admin_token");
+  
+      axios
+        .post(
+          `http://35.200.147.33/api/admin/market-freeze`,
+          { freeze: newFreezeState },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          // Check if the response contains a message
+          if (response.data && response.data.message) {
+            console.log(
+
+              response.data.message // Display success message
+            );
+          }
+          // Update freeze status based on the new state
+          setIsFrozen(newFreezeState); // Update state to the new freeze state
+          setShowConfirmDialog(false); // Close the confirmation dialog
+        })
+        .catch((error) => {
+          console.error("Error updating market state:", error);
+          alert(`Failed to update market state: ${error.response?.data?.message || "Unknown error"}`);
+          setShowConfirmDialog(false); // Close the confirmation dialog
+        });
+    };
+  
+    const handleCancel = () => {
+      setShowConfirmDialog(false); // Close the confirmation dialog without making an API call
+    };
 
 
     const showAutoCloseAlert = (message) => {
@@ -548,7 +340,7 @@ function CreatePlayer() {
     const fetchFreezeStatus = () => {
       const token = localStorage.getItem("admin_token");
       axios
-        .get("http://localhost:9999/admin/market-status", {
+        .get("http://35.200.147.33/api/admin/market-status", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -571,31 +363,31 @@ function CreatePlayer() {
     }, []);
   
     // Function to handle button click
-    const handleFreezeToggle = () => {
-      const token = localStorage.getItem("admin_token");
+    // const handleFreezeToggle = () => {
+    //   const token = localStorage.getItem("admin_token");
   
-      // Determine the new state
-      const newFreezeState = !isFrozen; // Toggle freeze state
+    //   // Determine the new state
+    //   const newFreezeState = !isFrozen; // Toggle freeze state
   
-      axios
-        .post(`http://35.200.147.33/api/admin/market-freeze`, { freeze: newFreezeState }, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          // Check if the response contains a message
-          if (response.data && response.data.message) {
-            alert(response.data.message); // Display success message
-          }
-          // Update freeze status based on the new state
-          setIsFrozen(newFreezeState); // Update state to the new freeze state
-        })
-        .catch((error) => {
-          console.error("Error updating market state:", error);
-          alert(`Failed to update market state: ${error.response?.data?.message || "Unknown error"}`);
-        });
-    };
+    //   axios
+    //     .post(`http://35.200.147.33/api/admin/market-freeze`, { freeze: newFreezeState }, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       // Check if the response contains a message
+    //       if (response.data && response.data.message) {
+    //         alert(response.data.message); // Display success message
+    //       }
+    //       // Update freeze status based on the new state
+    //       setIsFrozen(newFreezeState); // Update state to the new freeze state
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error updating market state:", error);
+    //       alert(`Failed to update market state: ${error.response?.data?.message || "Unknown error"}`);
+    //     });
+    // };
   
     // Close modal
     const handleClose = () => {
@@ -713,24 +505,7 @@ function CreatePlayer() {
        
       };
 
-      // const handleDelete = (id) => {
-      //   const token = localStorage.getItem("admin_token"); // Get token if required for authentication
-      //   axios
-      //     .delete(`http://35.200.147.33/api/admin/deleteplayer/${id}`, {
-      //       headers: {
-      //         admin_token: token, // Include token in headers if needed
-      //       },
-      //     })
-      //     .then(() => {
-      //       // Update the product data by filtering out the deleted player
-      //       setProductData((prevData) => prevData.filter((player) => player._id !== id));
-            
-      //     })
-      //     .catch((error) => {
-      //       console.error('Error deleting player:', error);
-      //       showAutoError(error.response?.data.message || "An error occurred while deleting the player.");
-      //     });
-      // };
+      
 
       const handleDelete = (id) => {
         const token = localStorage.getItem("admin_token"); // Get token for authentication if required
@@ -765,8 +540,23 @@ function CreatePlayer() {
         <DashboardLayout>
           <DashboardNavbar />
           <Button onClick={handleFreezeToggle} variant={isFrozen ? "danger" : "success"} style={{marginBottom:'10px'}}>
-          {isFrozen ? "Unfreeze" : "Freeze"}
-        </Button>
+        {isFrozen ? "Unfreeze " : "Freeze"}
+      </Button>
+
+      {/* React Bootstrap Modal for confirmation */}
+      <Modal show={showConfirmDialog} onHide={handleCancel} >
+        <Modal.Body style={{backgroundColor:'black',color:'white'}}>
+          <p>Do you want to  {newFreezeState ? "freeze" : "Unfreeze"} the market</p>
+        </Modal.Body>
+        <Modal.Footer style={{borderTop:'none',padding:'0',backgroundColor:'black',color:'white'}}>
+          <Button variant="secondary" onClick={handleCancel} style={{borderRadius:'50px'}}>
+            Cancel
+          </Button>
+          <Button variant="secondary" onClick={handleConfirm } style={{borderRadius:'50px'}}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
           <div className="row">
             <div className="col">
@@ -775,11 +565,11 @@ function CreatePlayer() {
                 onClick={handleShow}
                 className="mb-3"
                 style={{ background: "#B42134", border: "none" }}
+                disabled={productData.length >= 10} 
               >
                 Add Player
               </Button>
   
-              {/* Modal for adding/updating player */}
               <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} centered>
                 <Modal.Header closeButton>
                   <Modal.Title>{editId ? "Edit Player" : "Add Player"}</Modal.Title>
@@ -828,7 +618,7 @@ function CreatePlayer() {
                 </Modal.Footer>
               </Modal>
   
-              {/* Player table */}
+            
               <div className="table-responsive">
                 <Table bordered hover>
                   <thead>
@@ -856,7 +646,7 @@ function CreatePlayer() {
                                   width: "50px",
                                   height: "50px",
                                   borderRadius: "50%",
-                                  backgroundColor: "#ccc", // Placeholder background if no image
+                                  backgroundColor: "#ccc", 
                                   display: "flex",
                                   alignItems: "center",
                                   justifyContent: "center",
@@ -895,7 +685,7 @@ function CreatePlayer() {
                 </Table>
               </div>
   
-              {/* Pagination */}
+          
               <footer className="mt-4">
                 <Row className="align-items-center">
                   <Col xs={12} md={6}>

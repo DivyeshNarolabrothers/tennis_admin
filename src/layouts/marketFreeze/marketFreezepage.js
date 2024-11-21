@@ -41,7 +41,7 @@ function MarketFreeze() {
     const newFreezeState = !isFrozen; // Toggle freeze state
 
     axios
-      .post(`http://localhost:9999/admin/market-freeze`, { freeze: newFreezeState }, {
+      .post(`http://35.200.147.33/api/admin/market-freeze`, { freeze: newFreezeState }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
