@@ -565,7 +565,7 @@ function CreatePlayer() {
                 onClick={handleShow}
                 className="mb-3"
                 style={{ background: "#B42134", border: "none" }}
-                disabled={productData.length >= 10} 
+                
               >
                 Add Player
               </Button>
