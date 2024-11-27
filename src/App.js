@@ -152,7 +152,7 @@ export default function App() {
           </>
         )}
         {layout === "vr" && <Configurator />}
-        <Routes basename={process.env.REACT_APP_HOMEPAGE || '.'}>
+        <Routes>
           {getRoutes(routes)}
           <Route path="*" element={<Navigate to="/Users" />} />
         </Routes>
@@ -176,7 +176,7 @@ export default function App() {
         </>
       )}
       {layout === "vr" && <Configurator />}
-      <Routes basename={process.env.REACT_APP_HOMEPAGE || '.'}>
+      <Routes >
         {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
       </Routes>
