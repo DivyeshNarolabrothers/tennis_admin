@@ -143,7 +143,7 @@ function SignUp() {
     
 
     try {
-      const response = await axios.post('http://35.200.147.33/api/signup', formData);
+      const response = await axios.post('http://34.27.101.208:9999/signup', formData);
       console.log('Sign up successful:', response.data);
       // Navigate to login page after successful sign up
       navigate("/authentication/sign-in")

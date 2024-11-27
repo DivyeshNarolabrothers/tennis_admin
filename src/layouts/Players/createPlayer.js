@@ -1,254 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import { Button, Modal, Form, Card, Row, Col, Table, Spinner, Alert } from 'react-bootstrap';
-// import axios from 'axios';
-// import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-// import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-
-// function CreatePlayer() {
-//   const [players, setPlayers] = useState([]); // State to store players data
-//   const [loading, setLoading] = useState(true); // State to handle loading
-//   const [error, setError] = useState(null); // State to handle errors
-
-//   // Base URL for your image
-//   const baseImageUrl = "http://35.200.147.33/api/uploads/"; // Update this as per your API's image URL structure
-
-//   // Function to fetch players data from the API
-//   const fetchPlayers = async () => {
-//     try {
-//       const token = localStorage.getItem("admin_token"); // Get admin token from local storage
-//       const response = await axios.get("http://35.200.147.33/api/admin/players", {
-//         headers: { admin_token: token }, // Pass the admin token in the header
-//       });
-
-//       // Check if the response is successful
-//       if (response.data.success) {
-//         setPlayers(response.data.data); // Set players state with fetched data
-//       } else {
-//         setError(response.data.message); // Set error message if response status is false
-//       }
-//     } catch (err) {
-//       console.error("Error fetching players:", err);
-//       setError("Failed to load players. Please try again."); // Handle error
-//     } finally {
-//       setLoading(false); // Stop loading regardless of success or failure
-//     }
-//   };
-
-//   // Fetch players on component mount
-//   useEffect(() => {
-//     fetchPlayers();
-//   }, []);
-
-//   return (
-//     <DashboardLayout>
-//       <DashboardNavbar />
-//       {loading ? (
-//         <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-//           <Spinner animation="border" variant="primary" />
-//         </div>
-//       ) : error ? (
-//         <Alert variant="danger">{error}</Alert>
-//       ) : (
-//         <Table striped bordered hover responsive>
-//           <thead>
-//             <tr>
-//               <th>Profile Image</th>
-//               <th>Name</th>
-//               <th>Value</th>
-//               <th>Action</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {players.map((player, index) => (
-//               <tr key={player._id}>
-//                 <td>
-//                   <img
-//                     src={`http://35.200.147.33/api/images/${player.profile_image}`}
-//                     alt={player.name}
-//                     style={{ width: '50px', height: '50px',borderRadius:'50%' }}
-//                   />
-//                 </td>
-//                 <td>{player.name}</td>
-//                 <td>{player.value}</td>
-//                 <td>
-//                     <Button>Edit</Button>
-//                     <Button>Delete</Button>
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </Table>
-//       )}
-//     </DashboardLayout>
-//   );
-// }
-
-// export default CreatePlayer;
-
-// import React, { useEffect, useState } from 'react';
-// import { Button, Modal, Form, Table, Spinner, Alert } from 'react-bootstrap';
-// import axios from 'axios';
-// import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-// import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-
-// function CreatePlayer() {
-//   const [players, setPlayers] = useState([]); // State to store players data
-//   const [loading, setLoading] = useState(true); // State to handle loading
-//   const [error, setError] = useState(null); // State to handle errors
-//   const [showModal, setShowModal] = useState(false); // State to control the modal
-//   const [newPlayer, setNewPlayer] = useState({ name: '', profile_image: null, value: '' }); // State for new player form
-
-//   // Base URL for your image
-//   const baseImageUrl = "http://35.200.147.33/api/images/"; // Update this as per your API's image URL structure
-
-//   // Function to fetch players data from the API
-//   const fetchPlayers = async () => {
-//     try {
-//       const token = localStorage.getItem("admin_token"); // Get admin token from local storage
-//       const response = await axios.get("http://35.200.147.33/api/admin/players", {
-//         headers: { admin_token: token }, // Pass the admin token in the header
-//       });
-
-//       // Check if the response is successful
-//       if (response.data.success) {
-//         setPlayers(response.data.data); // Set players state with fetched data
-//       } else {
-//         setError(response.data.message); // Set error message if response status is false
-//       }
-//     } catch (err) {
-//       console.error("Error fetching players:", err);
-//       setError("Failed to load players. Please try again."); // Handle error
-//     } finally {
-//       setLoading(false); // Stop loading regardless of success or failure
-//     }
-//   };
-
-//   // Function to handle form submission
-//   const handleSubmit = async (e) => {
-//     e.preventDefault(); // Prevent default form submission
-//     const formData = new FormData(); // Create a FormData object
-
-//     formData.append('name', newPlayer.name); // Append name to form data
-//     formData.append('profile_image', newPlayer.profile_image); // Append file to form data
-//     formData.append('value', newPlayer.value); // Append value to form data
-
-//     try {
-//       const token = localStorage.getItem("admin_token"); // Get admin token from local storage
-//       const response = await axios.post("http://35.200.147.33/api/admin/createPlayer", formData, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data', // Set content type for file upload
-//           admin_token: token // Pass the admin token in the header
-//         },
-//       });
-
-//       if (response.data.success) {
-//         // Reset the form and close the modal
-//         setNewPlayer({ name: '', profile_image: null, value: '' });
-//         setShowModal(false);
-//         fetchPlayers(); // Fetch updated players list
-//       } else {
-//         setError(response.data.message); // Set error message if creation status is false
-//       }
-//     } catch (err) {
-//       console.error("Error creating player:", err);
-//       setError("Failed to create player. Please try again."); // Handle error
-//     }
-//   };
-
-//   // Fetch players on component mount
-//   useEffect(() => {
-//     fetchPlayers();
-//   }, []);
-
-//   return (
-//     <DashboardLayout>
-//       <DashboardNavbar />
-//       {loading ? (
-//         <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-//           <Spinner animation="border" variant="primary" />
-//         </div>
-//       ) : error ? (
-//         <Alert variant="danger">{error}</Alert>
-//       ) : (
-//         <>
-//           <Button variant="primary" onClick={() => setShowModal(true)}>Add Player</Button>
-//           <Table striped bordered hover responsive>
-//             <thead>
-//               <tr>
-//                 <th>Profile Image</th>
-//                 <th>Name</th>
-//                 <th>Value</th>
-//                 <th>Action</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {players.map((player, index) => (
-//                 <tr key={player._id}>
-//                   <td>
-//                     <img
-//                       src={`${baseImageUrl}${player.profile_image}`}
-//                       alt={player.name}
-//                       style={{ width: '50px', height: '50px', borderRadius: '50%' }}
-//                     />
-//                   </td>
-//                   <td>{player.name}</td>
-//                   <td>{player.value}</td>
-//                   <td>
-//                     <Button>Edit</Button>
-//                     <Button>Delete</Button>
-//                   </td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </Table>
-
-//           {/* Modal for Adding New Player */}
-//           <Modal show={showModal} onHide={() => setShowModal(false)}>
-//             <Modal.Header closeButton>
-//               <Modal.Title>Add New Player</Modal.Title>
-//             </Modal.Header>
-//             <Modal.Body>
-//               <Form onSubmit={handleSubmit}>
-//                 <Form.Group controlId="formPlayerName">
-//                   <Form.Label>Name</Form.Label>
-//                   <Form.Control
-//                     type="text"
-//                     placeholder="Enter player name"
-//                     value={newPlayer.name}
-//                     onChange={(e) => setNewPlayer({ ...newPlayer, name: e.target.value })}
-//                     required
-//                   />
-//                 </Form.Group>
-//                 <Form.Group controlId="formPlayerImage">
-//                   <Form.Label>Profile Image</Form.Label>
-//                   <Form.Control
-//                     type="file"
-//                     onChange={(e) => setNewPlayer({ ...newPlayer, profile_image: e.target.files[0] })} // Capture the file
-//                     required
-//                   />
-//                 </Form.Group>
-//                 <Form.Group controlId="formPlayerValue">
-//                   <Form.Label>Value</Form.Label>
-//                   <Form.Control
-//                     type="text"
-//                     placeholder="Enter player value"
-//                     value={newPlayer.value}
-//                     onChange={(e) => setNewPlayer({ ...newPlayer, value: e.target.value })}
-//                     required
-//                   />
-//                 </Form.Group>
-//                 <Button variant="primary" type="submit">Submit</Button>
-//               </Form>
-//             </Modal.Body>
-//           </Modal>
-//         </>
-//       )}
-//     </DashboardLayout>
-//   );
-// }
-
-// export default CreatePlayer;
-
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Form, Row, Col, Table } from "react-bootstrap";
 import axios from "axios";
@@ -283,7 +32,7 @@ function CreatePlayer() {
   
       axios
         .post(
-          `http://35.200.147.33/api/admin/market-freeze`,
+          `http://34.27.101.208:9999/admin/market-freeze`,
           { freeze: newFreezeState },
           {
             headers: {
@@ -340,7 +89,7 @@ function CreatePlayer() {
     const fetchFreezeStatus = () => {
       const token = localStorage.getItem("admin_token");
       axios
-        .get("http://35.200.147.33/api/admin/market-status", {
+        .get("http://34.27.101.208:9999/admin/market-status", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -370,7 +119,7 @@ function CreatePlayer() {
     //   const newFreezeState = !isFrozen; // Toggle freeze state
   
     //   axios
-    //     .post(`http://35.200.147.33/api/admin/market-freeze`, { freeze: newFreezeState }, {
+    //     .post(`http://34.27.101.208:9999/admin/market-freeze`, { freeze: newFreezeState }, {
     //       headers: {
     //         Authorization: `Bearer ${token}`,
     //       },
@@ -419,7 +168,7 @@ function CreatePlayer() {
     const fetchPlayerData = () => {
       const token = localStorage.getItem("admin_token");
       axios
-        .get("http://35.200.147.33/api/admin/players", {
+        .get("http://34.27.101.208:9999/admin/players", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -457,7 +206,7 @@ function CreatePlayer() {
         if (editId) {
             // Update existing player
             axios
-                .patch(`http://35.200.147.33/api/admin/updateplayer/${editId}`, formData, {
+                .patch(`http://34.27.101.208:9999/admin/updateplayer/${editId}`, formData, {
                     headers: {
                       Authorization: `Bearer ${token}`,
                     },
@@ -473,7 +222,7 @@ function CreatePlayer() {
         } else {
             // Add new player
             axios
-                .post(`http://35.200.147.33/api/admin/createPlayer`, formData, {
+                .post(`http://34.27.101.208:9999/admin/createPlayer`, formData, {
                     headers: {
                       Authorization: `Bearer ${token}`,
                     },
@@ -510,7 +259,7 @@ function CreatePlayer() {
       const handleDelete = (id) => {
         const token = localStorage.getItem("admin_token"); // Get token for authentication if required
         axios
-          .delete(`http://35.200.147.33/api/admin/deleteplayer/${id}`, {
+          .delete(`http://34.27.101.208:9999/admin/deleteplayer/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`, // Include token in headers if needed
             },
@@ -565,7 +314,6 @@ function CreatePlayer() {
                 onClick={handleShow}
                 className="mb-3"
                 style={{ background: "#B42134", border: "none" }}
-                
               >
                 Add Player
               </Button>
@@ -637,7 +385,7 @@ function CreatePlayer() {
                             {player.profile_image ? (
                               <img
                                 style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-                                src={`http://35.200.147.33/api/images/${player.profile_image}`}
+                                src={`http://34.27.101.208:9999/images/${player.profile_image}`}
                                 alt="Profile"
                               />
                             ) : (

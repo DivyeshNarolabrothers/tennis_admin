@@ -33,7 +33,7 @@ function Usertransation() {
   const fetchTransactions = async () => {
     try {
       const token = localStorage.getItem("admin_token"); // Get the admin token from local storage
-      const response = await axios.get("http://35.200.147.33/api/admin/usertransation", {
+      const response = await axios.get("http://34.27.101.208:9999/admin/usertransation", {
         headers: { Authorization: `Bearer ${token}` }, // Pass the admin token in the header
       });
 
@@ -116,7 +116,7 @@ function Usertransation() {
                   <td>{transaction.user_data.email}</td>
                   <td>
                     <img
-                      src={`http://35.200.147.33/api/images/${transaction.user_data.profile_image}`}
+                      src={`http://34.27.101.208:9999/images/${transaction.user_data.profile_image}`}
                       alt={transaction.user_data.name}
                       style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                     />
@@ -180,7 +180,7 @@ function Usertransation() {
                     <td>{player.name}</td>
                     <td>
                       <img
-                        src={`http://35.200.147.33/api/images/${player.profile_image}`}
+                        src={`http://34.27.101.208:9999/images/${player.profile_image}`}
                         alt={player.name}
                         style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                       />

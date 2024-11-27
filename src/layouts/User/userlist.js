@@ -59,7 +59,7 @@ function UserList() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("admin_token");
-      const response = await axios.get("http://35.200.147.33/api/admin/userList", {
+      const response = await axios.get("http://34.27.101.208:9999/admin/userList", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -147,7 +147,7 @@ function UserList() {
 
   //       // Player edit mode
   //       const response = await axios.patch(
-  //         `http://35.200.147.33/api/admin/userUpdate-team-players/${selectedUser._id}`,
+  //         `http://34.27.101.208:9999/admin/userUpdate-team-players/${selectedUser._id}`,
   //         { players: payload }, // Only updating share_quantity
   //         { headers: { Authorization: `Bearer ${token}` } }
   //       );
@@ -194,7 +194,7 @@ function UserList() {
   //       }
 
   //       const response = await axios.patch(
-  //         `http://35.200.147.33/api/admin/userUpdate/${selectedUser._id}`,
+  //         `http://34.27.101.208:9999/admin/userUpdate/${selectedUser._id}`,
   //         formDataToSend,
   //         {
   //           headers: {
@@ -234,7 +234,7 @@ function UserList() {
   //     if (isEditMode && selectedUser) {
   //       // Edit mode: PATCH request to update user
   //       const response = await axios.patch(
-  //         `http://35.200.147.33/api/admin/userUpdate/${selectedUser._id}`,
+  //         `http://34.27.101.208:9999/admin/userUpdate/${selectedUser._id}`,
   //         formDataToSend,
   //         {
   //           headers: {
@@ -258,7 +258,7 @@ function UserList() {
   //     } else {
   //       // Add new user: POST request to register user
   //       const response = await axios.post(
-  //         "http://35.200.147.33/api/user/register",
+  //         "http://34.27.101.208:9999/user/register",
   //         formDataToSend,
   //         {
   //           headers: {
@@ -328,7 +328,7 @@ function UserList() {
   
         // Player edit mode
         const response = await axios.patch(
-          `http://35.200.147.33/api/admin/userUpdate-team-players/${selectedUser._id}`,
+          `http://34.27.101.208:9999/admin/userUpdate-team-players/${selectedUser._id}`,
           { players: payload }, // Only updating share_quantity
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -373,7 +373,7 @@ function UserList() {
         }
   
         const response = await axios.patch(
-          `http://35.200.147.33/api/admin/userUpdate/${selectedUser._id}`,
+          `http://34.27.101.208:9999/admin/userUpdate/${selectedUser._id}`,
           formDataToSend,
           {
             headers: {
@@ -411,7 +411,7 @@ function UserList() {
       }
         // Add User API
         const response = await axios.post(
-          "http://35.200.147.33/api/user/register",
+          "http://34.27.101.208:9999/user/register",
           formDataToSend,
           {
             headers: {
@@ -469,7 +469,7 @@ function UserList() {
 
       // Make API call to delete the player without confirmation
       const response = await axios.patch(
-        `http://35.200.147.33/api/admin/userUpdate-team-players/${selectedUser._id}`,
+        `http://34.27.101.208:9999/admin/userUpdate-team-players/${selectedUser._id}`,
         {
           players: [
             {
@@ -530,7 +530,7 @@ function UserList() {
 
     try {
         // Trigger the API call to delete the user
-        const response = await axios.delete(`http://35.200.147.33/api/admin/user/delete/${userId}`, {
+        const response = await axios.delete(`http://34.27.101.208:9999/admin/user/delete/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -584,7 +584,7 @@ function UserList() {
                 <td>{user._id}</td>
                 <td>
                   <img
-                    src={`http://35.200.147.33/api/images/${user.profile_image}`}
+                    src={`http://34.27.101.208:9999/images/${user.profile_image}`}
                     alt={user.name}
                     style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                   />
@@ -693,7 +693,7 @@ function UserList() {
                           <td>Team Profile Image</td>
                           <td>
                             <img
-                              src={`http://35.200.147.33/api/images/${selectedUser.team.profile_image}`}
+                              src={`http://34.27.101.208:9999/images/${selectedUser.team.profile_image}`}
                               alt={selectedUser.team.name}
                               style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                             />
@@ -720,7 +720,7 @@ function UserList() {
                               <td>{player.name}</td>
                               <td>
                                 <img
-                                  src={`http://35.200.147.33/api/images/${player.profile_image}`}
+                                  src={`http://34.27.101.208:9999/images/${player.profile_image}`}
                                   alt={player.name}
                                   style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                                 />

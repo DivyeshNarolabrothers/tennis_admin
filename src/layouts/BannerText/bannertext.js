@@ -36,7 +36,7 @@
 //     const fetchFaqs = async () => {
 //         try {
 //             const token = localStorage.getItem('admin_token');
-//             const response = await axios.get('http://35.200.147.33/api/admin/bannertext', {
+//             const response = await axios.get('http://34.27.101.208:9999/admin/bannertext', {
 //                 headers: {
 //                     Authorization: `Bearer ${token}`,
 //                 },
@@ -71,8 +71,8 @@
 //         e.preventDefault();
 //         const token = localStorage.getItem('admin_token');
 //         const url = currentFaqId
-//             ? `http://35.200.147.33/api/admin/banner_update/${currentFaqId}`
-//             : 'http://35.200.147.33/api/admin/banner_create';
+//             ? `http://34.27.101.208:9999/admin/banner_update/${currentFaqId}`
+//             : 'http://34.27.101.208:9999/admin/banner_create';
 
 //         try {
 //             const response = await axios[currentFaqId ? 'patch' : 'post'](url, formData, {
@@ -215,7 +215,7 @@ function BannerText() {
     const fetchFaqs = async () => {
         try {
             const token = localStorage.getItem('admin_token');
-            const response = await axios.get('http://35.200.147.33/api/admin/bannertext', {
+            const response = await axios.get('http://34.27.101.208:9999/admin/bannertext', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -250,8 +250,8 @@ function BannerText() {
         e.preventDefault();
         const token = localStorage.getItem('admin_token');
         const url = currentFaqId
-            ? `http://35.200.147.33/api/admin/banner_update/${currentFaqId}`
-            : 'http://35.200.147.33/api/admin/banner_create';
+            ? `http://34.27.101.208:9999/admin/banner_update/${currentFaqId}`
+            : 'http://34.27.101.208:9999/admin/banner_create';
 
         try {
             const response = await axios[currentFaqId ? 'patch' : 'post'](url, formData, {

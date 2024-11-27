@@ -77,7 +77,7 @@ import Swal from 'sweetalert2';
 //     const fetchFaqs = async () => {
 //         try {
 //             const token = localStorage.getItem('admin_token');
-//             const response = await axios.get('http://35.200.147.33/api/admin/faqs', {
+//             const response = await axios.get('http://34.27.101.208:9999/admin/faqs', {
 //                 headers: {
 //                     Authorization: `Bearer ${token}`,
 //                 },
@@ -114,8 +114,8 @@ import Swal from 'sweetalert2';
 //         e.preventDefault();
 //         const token = localStorage.getItem('admin_token');
 //         const url = currentFaqId
-//             ? `http://35.200.147.33/api/admin/faq/edit/${currentFaqId}`
-//             : 'http://35.200.147.33/api/admin/faq/create';
+//             ? `http://34.27.101.208:9999/admin/faq/edit/${currentFaqId}`
+//             : 'http://34.27.101.208:9999/admin/faq/create';
 
 //         try {
 //             const response = await axios[currentFaqId ? 'put' : 'post'](url, formData, {
@@ -145,7 +145,7 @@ import Swal from 'sweetalert2';
 //         const token = localStorage.getItem('admin_token');
 
 //         try {
-//             await axios.delete(`http://35.200.147.33/api/admin/faq/delete/${faqId}`, {
+//             await axios.delete(`http://34.27.101.208:9999/admin/faq/delete/${faqId}`, {
 //                 headers: {  Authorization: `Bearer ${token}` },
 //             });
 //             setFaqs((prevFaqs) => prevFaqs.filter((faq) => faq._id !== faqId));
@@ -271,7 +271,7 @@ function Faq() {
     const fetchFaqs = async () => {
         try {
             const token = localStorage.getItem('admin_token');
-            const response = await axios.get('http://35.200.147.33/api/admin/faqs', {
+            const response = await axios.get('http://34.27.101.208:9999/admin/faqs', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -306,8 +306,8 @@ function Faq() {
         e.preventDefault();
         const token = localStorage.getItem('admin_token');
         const url = currentFaqId
-            ? `http://35.200.147.33/api/admin/faq/edit/${currentFaqId}`
-            : 'http://35.200.147.33/api/admin/faq/create';
+            ? `http://34.27.101.208:9999/admin/faq/edit/${currentFaqId}`
+            : 'http://34.27.101.208:9999/admin/faq/create';
 
         try {
             const response = await axios[currentFaqId ? 'put' : 'post'](url, formData, {
@@ -338,7 +338,7 @@ function Faq() {
         const token = localStorage.getItem('admin_token');
 
         try {
-            await axios.delete(`http://35.200.147.33/api/admin/faq/delete/${faqId}`, {
+            await axios.delete(`http://34.27.101.208:9999/admin/faq/delete/${faqId}`, {
                 headers: {  Authorization: `Bearer ${token}` },
             });
             await fetchFaqs();

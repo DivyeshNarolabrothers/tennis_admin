@@ -11,7 +11,7 @@ function MarketFreeze() {
   const fetchFreezeStatus = () => {
     const token = localStorage.getItem("admin_token");
     axios
-      .get("http://35.200.147.33/api/admin/market-status", {
+      .get("http://34.27.101.208:9999/admin/market-status", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,7 +41,7 @@ function MarketFreeze() {
     const newFreezeState = !isFrozen; // Toggle freeze state
 
     axios
-      .post(`http://35.200.147.33/api/admin/market-freeze`, { freeze: newFreezeState }, {
+      .post(`http://34.27.101.208:9999/admin/market-freeze`, { freeze: newFreezeState }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
